@@ -1,0 +1,5 @@
+.container {
+    border: 5px outset red;
+    background-color: yellow;    
+    text-align: center;
+  }
