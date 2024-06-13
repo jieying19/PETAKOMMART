@@ -2,6 +2,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ProfileController;
@@ -94,6 +95,14 @@ Route::get(
     [InventoryController::class, 'index']
 
 )->name('inventorys');
+
+
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
+
+//Search
+Route::get('/manageinventory/search',[InventoryController::class, 'search'])->name('inventory.search');
+
+
 //create blog user
 Route::get(
     '/manageinventory/create',
@@ -121,6 +130,7 @@ Route::delete(//pakai method pdelete sebab form pakai dekat edit.blade delete
 
 )->name('inventorys.delete'); //mesti akan jumpa route akan guna nama ni
 
+Route::post('/inventory/scan', [InventoryController::class, 'scanBarcode'])->name('inventory.scanBarcode');
 
 //report
 //index

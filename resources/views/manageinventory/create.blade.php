@@ -20,6 +20,18 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="product_category">Product Category</label>
+                                <select id="product_category" class="form-control" name="product_category" required>
+                                    <option value="" disabled>Select Category</option>
+                                    <option value="food">Food</option>
+                                    <option value="beverage">Beverage</option>
+                                    <option value="dessert">Dessert</option>
+                                    <option value="stationary">Stationary</option>
+                                    <option value="others">Others</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="quantity">Quantity</label>
                                 <input id="quantity" type="quantity" class="form-control" name="quantity" required>
                             </div>

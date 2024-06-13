@@ -11,13 +11,25 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="productcode">Product COde</label>
+                                <label for="productcode">Product Code</label>
                                 <input id="productcode" type="text" class="form-control" name="productcode" value="{{ $item->productcode }}" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="product_name">Product Name</label>
                                 <input id="product_name" type="text" class="form-control" name="product_name" value="{{ $item->product_name }}" required>
+                            </div>
+
+                          
+                            <div class="form-group">
+                                <label for="product_category">Product Category</label>
+                                <select id="product_category" class="form-control" name="product_category" required>
+                                    <option value="" disable>Select Category</option>
+                                    <option value="food" {{ $item->product_category == 'food' ? 'selected' : '' }}>Food</option>
+                                    <option value="beverage" {{ $item->product_category == 'beverage' ? 'selected' : '' }}>Beverage</option>
+                                    <option value="stationary" {{ $item->product_category == 'stationary' ? 'selected' : '' }}>Stationary</option>
+                                    <option value="others" {{ $item->product_category == 'others' ? 'selected' : '' }}>Others</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
