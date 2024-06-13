@@ -43,10 +43,18 @@ class InventoryController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->input('query');
-        $inventorys = Inventory::where('product_name', 'LIKE', "%{$query}%")->get();
-
-        return view('manageinventory.index', compact('inventorys'));
+        
+            $query = $request->input('query');
+        
+            $inventorys = Inventory::where('product_name', 'like', "%$query%")
+                                    ->orWhere('productcode', 'like', "%$query%")
+                                    ->orderBy('itemID')
+                                    ->get();
+        
+            // Retrieve distinct categories for dropdown
+            $categories = Inventory::select('product_category')->distinct()->pluck('product_category');
+        
+            return view('manageinventory.index', compact('inventorys', 'categories', 'query'));
 
     }
 
