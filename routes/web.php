@@ -49,6 +49,12 @@ Route::delete('/users/{id}/delete',[ProfileController::class, 'delete'])->name('
 // Route::get('/profile/{id}', [App\Http\Controllers\profileController::class, 'edit'])->name('profile');
 // Route::get('/editProfile/{id}', [App\Http\Controllers\profileController::class, 'update']);
 
+
+// routes/web.php for display profile
+Route::get('/users1/{id}', [ProfileController::class, 'showProfile'])->name('users.showProfile');
+
+
+
 //schedule
 Route::get('/ManageSchedule', function () {
     return view('ManageSchedule.AddSchedule')->name('manageSchedule');

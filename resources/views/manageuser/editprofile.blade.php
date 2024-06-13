@@ -1,16 +1,23 @@
 @extends('layouts.sideNav')
 
 @section('content')
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Edit Profile') }}</div>
 
+
                 <div class="card-body">
                     <form method="POST" action="{{ route('users.update', $user->id) }}">
                         @csrf
                         @method('PUT')
+
+    
+
+
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
@@ -47,45 +54,59 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
-                            <label for="category" class="col-md-4 col-form-label text-md-end">{{ __('User Type') }}</label>
+                        @if(auth()->user()->category == 'Admin')
+                            <div class="row mb-3">
+                                <label for="category" class="col-md-4 col-form-label text-md-end">{{ __('User Type') }}</label>
 
-                            <div class="col-md-6">
-                                <select class="form-control" name="category">
-                                    <option value="">Please select</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Cashier">Cashier</option>
-
-                                </select>
-                                @error('category')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                                
-
+                                <div class="col-md-6">
+                                    <select class="form-control" name="category">
+                                        <option value="">Please select</option>
+                                        <option value="Admin" {{ $user->category == 'Admin' ? 'selected' : '' }}>Admin</option>
+                                        <option value="Cashier" {{ $user->category == 'Cashier' ? 'selected' : '' }}>Cashier</option>
+                                    </select>
+                                    @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('User Gender') }}</label>
+                            <div class="row mb-3">
+                                <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('User Gender') }}</label>
 
-                            <div class="col-md-6">
-                                <select class="form-control" name="gender">
-                                    <option value="">Please select</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-
-                                </select>
-                                @error('category')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                                
-
+                                <div class="col-md-6">
+                                    <select class="form-control" name="gender">
+                                        <option value="">Please select</option>
+                                        <option value="Male" {{ $user->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                                        <option value="Female" {{ $user->gender == 'Female' ? 'selected' : '' }}>Female</option>
+                                    </select>
+                                    @error('gender')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="row mb-3">
+                                <label for="category" class="col-md-4 col-form-label text-md-end">{{ __('User Type') }}</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="category" value="{{ $user->category }}" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="gender" class="col-md-4 col-form-label text-md-end">{{ __('User Gender') }}</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="gender" value="{{ $user->gender }}" readonly>
+                                </div>
+                            </div>
+                        @endif
+
+    
 
 
                         <div class="row mb-0">
@@ -101,6 +122,5 @@
         </div>
     </div>
 </div>
-
 
 @endsection

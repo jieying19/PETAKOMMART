@@ -22,6 +22,13 @@ class ProfileController extends Controller
         return view('manageuser.createprofile');
     }
 
+//show profile
+    public function showProfile($id)
+    {
+        $user = User::findOrFail($id); // Fetch the user details by ID
+        return view('manageuser.displayprofile', compact('user'));
+    }
+
     //process store
     function store(Request $request)
     {
@@ -49,6 +56,7 @@ public function edit($id)
     $user = User::find($id);
     return view('manageuser.editprofile', compact('user'));
 }
+
 public function update(Request $request, $id)
 {
     // Validate the form data
@@ -73,9 +81,19 @@ public function update(Request $request, $id)
     // Save the updated user
     $user->save();
 
-    // Redirect the user to their updated profile or any other appropriate page
-    return redirect()->route('users', $user->id)->with('success', 'Profile updated successfully');
+    // Check the authenticated user's category
+    if (auth()->user()->category == 'Admin') {
+        // Redirect to the users route for admin
+        return redirect()->route('users')->with('success', 'Profile updated successfully');
+    } else if (auth()->user()->category == 'Cashier') {
+        // Return the displayprofile view for cashier
+        return view('manageuser.displayprofile', ['user' => $user])->with('success', 'Profile updated successfully');
+    }
+
+    // Default fallback in case of unexpected category
+    return redirect()->route('home')->with('error', 'Unauthorized action');
 }
+
 
 
 // public function update($id, request $request)
