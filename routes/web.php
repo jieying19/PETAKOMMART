@@ -135,6 +135,8 @@ Route::post('/salesReport', 'App\Http\Controllers\salesreportsController@store')
 //delete
 Route::delete('/salesReport/{id}', 'App\Http\Controllers\salesreportsController@destroy')->name('salesReport.destroy');
 
+//search (Perfective Maintenance)
+Route::get('/sales-report/search', [salesreportsController::class, 'search'])->name('sales-report.search');
 
 
 Route::get('/Petakom', function () {

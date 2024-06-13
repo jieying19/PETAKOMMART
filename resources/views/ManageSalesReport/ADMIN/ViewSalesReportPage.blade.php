@@ -65,7 +65,6 @@
 
     </nav>
 
-    </table>
     <br>
     <br>
     <br>
@@ -75,10 +74,8 @@
         <br>
         <td>
             <table style="background : white" border="1" align="center">
-
                 <tr>
                     <td style="width: 400px;height:0; text-align:center;">
-
                         <head>
                             <h4 style="color : red; text-align:center;">Weekly Sales Report</h4>
                         </head>
@@ -88,6 +85,14 @@
                         <hr>
                         <br>
                         <br>
+                        
+                        <!-- Search bar  Perfective Maintenance-->
+                        <form method="GET" action="{{ route('sales-report.search') }}" style="text-align: center; margin-bottom: 20px;">
+                            <label for="week" style="font-weight: bold;">Search by Week:</label>
+                            <input type="text" id="week" name="week" placeholder="Enter week number" style="margin-left: 10px;">
+                            <button type="submit" style="background-color: red; color: white; margin-left: 10px;">Search</button>
+                        </form>
+
                         <table>
                             <tr>
                                 <th><label for="fname">Total Sales Report:</th>
@@ -116,7 +121,7 @@
                                 <th>Wednesday</th>
                                 <th>Thursday</th>
                                 <th>Friday</th>
-
+                                <th>Actions</th>
                             </tr>
                             @foreach ($data_report as $salesreports)
                                 <tr>
@@ -131,35 +136,19 @@
                                             method="POST">
                                             @csrf
                                             @method('delete')
-                                            <button
-                                                style="background-color: red; color: white;">{{ __('Delete') }}</button>
+                                            <button style="background-color: red; color: white;">{{ __('Delete') }}</button>
                                         </form>
+                                        <a href="/salesReport/{{$salesreports->id}}/edit">
+                                            <button type="button" style="background-color: red; color: white;">Update</button>
+                                        </a>
                                     </td>
-                                    <td>
-                                        {{-- <form action="{{ route('salesReport.update', $salesreports['id']) }}"
-                                            method="POST">
-                                            @csrf
-                                            @method('PUT')
-                                            <a
-                                                href="{{ route('ManageSalesReport.ADMIN.UpdateSalesReportPage', $salesreports['id']) }}"><button
-                                                    type="button"
-                                                    style="background-color: red; color: white;">Update</button></a>
-                                        </form> --}}
-                                        <a
-                                                href="/salesReport/{{$salesreports->id}}/edit"><button
-                                                    type="button"
-                                                    style="background-color: red; color: white;">Update</button></a>
-                                    </td>
-
                                 </tr>
                             @endforeach
-
-
                         </table>
 
-
-
-
+                        @if ($data_report->isEmpty())
+                            <p style="text-align: center; color: red;">No reports found for the specified week.</p>
+                        @endif
 
                         <!-- Bootstrap core JS-->
                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
