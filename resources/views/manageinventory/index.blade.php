@@ -24,7 +24,10 @@
         </select>
         <button type="submit">Filter</button>
     </form>
-
+   
+    <div class="createbutton">
+               <a href="{{ route('inventorys.create') }}" class="btn btn-success" >Add New Inventory</a>
+    </div>
     <!-- Barcode Scanner Interface -->
     <div id="barcode-scanner">
         <button id="start-scan">Start Scan</button>
@@ -78,9 +81,7 @@
             </tbody>
         </table>
         
-        <tr>
-                <td><a href="{{ route('inventorys.create') }}" class="btn btn-success">Add New Inventory</a></td>
-            </tr>
+       
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
@@ -129,5 +130,11 @@ document.getElementById('stop-scan').addEventListener('click', function() {
     .table-container {
         margin-top: 20px;
     }
+
+    .createbutton{
+        float:right;
+        margin-bottom: 10px;
+    }
+  
     </style>
 @endsection
