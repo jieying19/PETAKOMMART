@@ -54,6 +54,14 @@ class salesreportsController extends Controller
         return view('ManageSalesReport.ADMIN.UpdateSalesReportPage', ['data_report'=>$data_report]);
     }
 
+    //Search (Perfective Maintenance)
+    public function search(Request $request)
+        {
+        $week = $request->input('week');
+        $data_report = \App\Models\salesreports::where('week', $week)->get();
+        return view('ManageSalesReport.ADMIN.ViewSalesReportPage', ['data_report' => $data_report]);
+    }
+
      // public function update($id, Request $request)
     // {
     //     dd($sale);
